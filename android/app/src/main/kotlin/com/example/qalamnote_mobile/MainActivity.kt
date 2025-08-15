@@ -1,4 +1,4 @@
-package com.example.qalamnot_mobile
+package com.example.qalamnote_mobile
 
 import io.flutter.embedding.android.FlutterActivity
 

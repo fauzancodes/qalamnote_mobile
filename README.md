@@ -1,4 +1,4 @@
-# qalamnot_mobile
+# qalamnote_mobile
 
 A new Flutter project.
 
