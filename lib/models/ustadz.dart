@@ -2,7 +2,7 @@ import 'package:hive/hive.dart';
 
 part 'ustadz.g.dart';
 
-@HiveType(typeId: 0)
+@HiveType(typeId: 3)
 class Ustadz {
   @HiveField(0)
   String id;

@@ -26,7 +26,7 @@ class CustomText extends StatelessWidget {
       GoogleFonts.inter(
         fontSize: 14,
         fontWeight: FontWeight.w400,
-        color: CustomColor.base_2,
+        color: CustomColor.base_4,
       ),
       key: key,
     );

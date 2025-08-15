@@ -35,15 +35,15 @@ class CustomTextField extends StatelessWidget {
           obscureText: obscureText,
           decoration: InputDecoration(
             hintText: placeholder,
-            hintStyle: const TextStyle(color: CustomColor.base_2),
+            hintStyle: const TextStyle(color: CustomColor.base_4),
             contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
-              borderSide: const BorderSide(color: CustomColor.base_2),
+              borderSide: const BorderSide(color: CustomColor.base_4),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
-              borderSide: const BorderSide(color: CustomColor.base_2),
+              borderSide: const BorderSide(color: CustomColor.base_4),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),

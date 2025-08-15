@@ -8,7 +8,7 @@ part of 'ustadz.dart';
 
 class UstadzAdapter extends TypeAdapter<Ustadz> {
   @override
-  final int typeId = 0;
+  final int typeId = 3;
 
   @override
   Ustadz read(BinaryReader reader) {
