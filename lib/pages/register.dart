@@ -17,16 +17,14 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  final _fullNameController = TextEditingController();
-  final _emailController = TextEditingController();
+  final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
 
   void _registerUser() async {
-    String fullName = _fullNameController.text.trim();
-    String email = _emailController.text.trim();
+    String username = _usernameController.text.trim();
     String password = _passwordController.text.trim();
 
-    if (fullName.isEmpty || email.isEmpty || password.isEmpty) {
+    if (username.isEmpty || password.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Please fill all fields'),
@@ -36,21 +34,10 @@ class _RegisterPageState extends State<RegisterPage> {
       return;
     }
 
-    if (fullName.length < 3) {
+    if (username.length < 3) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Full name must be at least 3 characters long'),
-          backgroundColor: Colors.orange,
-        ),
-      );
-      return;
-    }
-
-    final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
-    if (!emailRegex.hasMatch(email)) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Please enter a valid email address'),
+          content: Text('username must be at least 3 characters long'),
           backgroundColor: Colors.orange,
         ),
       );
@@ -78,8 +65,7 @@ class _RegisterPageState extends State<RegisterPage> {
     final uuid = Uuid();
     User newUser = User(
       id: uuid.v4(),
-      fullName: fullName,
-      email: email,
+      username: username,
       password: password,
     );
     await box.put(newUser.id, newUser);
@@ -143,15 +129,9 @@ class _RegisterPageState extends State<RegisterPage> {
             CustomText.subtitle("And start recording lectures from your ustadz. Organize your notes, revisit them anytime, and keep your journey of learning alive."),
             const SizedBox(height: 32),
             CustomTextField(
-              label: "Full Name",
-              placeholder: "Example: John Doe",
-              controller: _fullNameController,
-            ),
-            const SizedBox(height: 16),
-            CustomTextField(
-              label: "Email Address",
-              placeholder: "Example: johndoe@gmail.com",
-              controller: _emailController,
+              label: "Username",
+              placeholder: "Example: johndoe123",
+              controller: _usernameController,
             ),
             const SizedBox(height: 16),
             CustomTextField(

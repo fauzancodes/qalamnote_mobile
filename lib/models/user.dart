@@ -8,18 +8,14 @@ class User {
   String id;
 
   @HiveField(1)
-  String fullName;
+  String username;
 
   @HiveField(2)
-  String email;
-
-  @HiveField(3)
   String password;
 
   User({
     required this.id,
-    required this.fullName,
-    required this.email,
+    required this.username,
     required this.password,
   });
 }

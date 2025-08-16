@@ -18,14 +18,14 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   var box = Hive.box<User>('users');
 
-  final _emailController = TextEditingController();
+  final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
 
   void _loginUser() {
-    String email = _emailController.text.trim();
+    String username = _usernameController.text.trim();
     String password = _passwordController.text.trim();
 
-    if (email.isEmpty || password.isEmpty) {
+    if (username.isEmpty || password.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Please fill all fields'),
@@ -36,11 +36,11 @@ class _LoginPageState extends State<LoginPage> {
     }
 
     User? foundUser = box.values.firstWhere(
-      (user) => user.email == email && user.password == password,
-      orElse: () => User(id: '', fullName: '', email: '', password: ''),
+      (user) => user.username == username && user.password == password,
+      orElse: () => User(id: '', username: '', password: ''),
     );
 
-    if (foundUser.email.isNotEmpty) {
+    if (foundUser.username.isNotEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Login successful'),
@@ -54,7 +54,7 @@ class _LoginPageState extends State<LoginPage> {
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Invalid email or password'),
+          content: Text('Invalid username or password'),
           backgroundColor: Colors.redAccent,
         ),
       );
@@ -75,9 +75,9 @@ class _LoginPageState extends State<LoginPage> {
             CustomText.subtitle("And capture every word of wisdom from your favorite ustadz, anytime, anywhere."),
             const SizedBox(height: 32),
             CustomTextField(
-              label: "Email Address",
-              placeholder: "example@mail.com",
-              controller: _emailController,
+              label: "Username",
+              placeholder: "johndoe123",
+              controller: _usernameController,
             ),
             const SizedBox(height: 16),
             CustomTextField(
