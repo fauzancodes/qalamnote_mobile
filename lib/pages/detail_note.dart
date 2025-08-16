@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hive/hive.dart';
 import 'package:qalamnote_mobile/components/custom_color.dart';
-import '../models/note.dart';
+import 'package:qalamnote_mobile/models/note.dart';
+import 'package:qalamnote_mobile/models/place.dart';
+import 'package:qalamnote_mobile/models/ustadz.dart';
+import 'package:uuid/uuid.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class DetailNotePage extends StatefulWidget {
   final String noteKey;
@@ -20,12 +24,16 @@ class _DetailNotePageState extends State<DetailNotePage> {
   late TextEditingController _ustadzController;
   late TextEditingController _placeController;
   late Box<Note> notesBox;
+  late Box<Ustadz> ustadzsBoxes;
+  late Box<Place> placesBoxes;
   late Note note;
 
   @override
   void initState() {
     super.initState();
     notesBox = Hive.box<Note>('notes');
+    ustadzsBoxes = Hive.box<Ustadz>('ustadzs');
+    placesBoxes = Hive.box<Place>('places');
 
     note = notesBox.get(widget.noteKey)!;
 
@@ -59,6 +67,30 @@ class _DetailNotePageState extends State<DetailNotePage> {
 
     notesBox.put(widget.noteKey, updatedNote);
     debugPrint("Note updated (UUID: ${widget.noteKey})");
+
+    if (ustadz.isNotEmpty) {
+      final exists = ustadzsBoxes.values.any(
+        (u) => u.fullName.toLowerCase() == ustadz.toLowerCase(),
+      );
+      if (!exists) {
+        ustadzsBoxes.put(
+          Uuid().v4(),
+          Ustadz(id: Uuid().v4(), fullName: ustadz),
+        );
+      }
+    }
+
+    if (place.isNotEmpty) {
+      final exists = placesBoxes.values.any(
+        (p) => p.name.toLowerCase() == place.toLowerCase(),
+      );
+      if (!exists) {
+        placesBoxes.put(
+          Uuid().v4(),
+          Place(id: Uuid().v4(), name: place),
+        );
+      }
+    }
 
     Navigator.pop(context);
   }
@@ -177,6 +209,73 @@ class _DetailNotePageState extends State<DetailNotePage> {
     super.dispose();
   }
 
+  Widget _buildTypeAhead<T>({
+    required TextEditingController controller,
+    required Box<T> box,
+    required String Function(T) getName,
+    required String hint,
+  }) {
+    return ValueListenableBuilder(
+      valueListenable: box.listenable(),
+      builder: (context, Box<T> _, __) {
+        return TypeAheadField<String>(
+          key: ValueKey(box.values.map(getName).join(",")),
+          controller: controller,
+          suggestionsCallback: (pattern) {
+            final q = pattern.toLowerCase();
+            final results = box.values
+                .map((e) => getName(e).trim())
+                .where((name) => name.isNotEmpty && name.toLowerCase().contains(q))
+                .toSet()
+                .toList();
+
+            results.sort((a, b) => a.toLowerCase().compareTo(b.toLowerCase()));
+            return results;
+          },
+          builder: (context, textController, focusNode) {
+            return TextField(
+              controller: textController,
+              focusNode: focusNode,
+              decoration: InputDecoration(
+                hintText: hint,
+                border: InputBorder.none,
+              ),
+              style: GoogleFonts.inter(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                color: CustomColor.base_3,
+              ),
+            );
+          },
+          itemBuilder: (context, suggestion) {
+            return ListTile(
+              title: Text(suggestion),
+              trailing: IconButton(
+                icon: const Icon(Icons.delete, color: Colors.red),
+                onPressed: () {
+                  final key = box.keys.firstWhere(
+                    (k) => getName(box.get(k) as T).toLowerCase() ==
+                        suggestion.toLowerCase(),
+                    orElse: () => null,
+                  );
+                  if (key != null) {
+                    box.delete(key);
+
+                    debugPrint("Deleted: $suggestion");
+                  }
+                },
+              ),
+            );
+          },
+          onSelected: (suggestion) {
+            controller.text = suggestion;
+          },
+          hideOnEmpty: true,
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -228,32 +327,20 @@ class _DetailNotePageState extends State<DetailNotePage> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: TextField(
+              child: _buildTypeAhead<Ustadz>(
                 controller: _ustadzController,
-                style: GoogleFonts.inter(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-                  color: CustomColor.base_3,
-                ),
-                decoration: const InputDecoration(
-                  hintText: "Ustadz name here...",
-                  border: InputBorder.none,
-                ),
+                box: ustadzsBoxes,
+                getName: (u) => (u).fullName,
+                hint: "Ustadz name here...",
               ),
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
-              child: TextField(
+              child: _buildTypeAhead<Place>(
                 controller: _placeController,
-                style: GoogleFonts.inter(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-                  color: CustomColor.base_3,
-                ),
-                decoration: const InputDecoration(
-                  hintText: "Place name here...",
-                  border: InputBorder.none,
-                ),
+                box: placesBoxes,
+                getName: (p) => (p).name,
+                hint: "Place name here...",
               ),
             ),
             Expanded(

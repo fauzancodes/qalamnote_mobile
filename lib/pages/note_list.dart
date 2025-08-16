@@ -1,9 +1,9 @@
 import 'package:qalamnote_mobile/components/custom_color.dart';
+import 'package:qalamnote_mobile/models/note.dart';
 import 'package:qalamnote_mobile/pages/create_note.dart';
 import 'package:qalamnote_mobile/pages/detail_note.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import '../models/note.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class NoteListPage extends StatelessWidget {

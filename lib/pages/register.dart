@@ -3,11 +3,11 @@ import 'package:qalamnote_mobile/components/custom_color.dart';
 import 'package:qalamnote_mobile/components/custom_text.dart';
 import 'package:qalamnote_mobile/components/custom_text_field.dart';
 import 'package:qalamnote_mobile/components/custom_text_with_link.dart';
+import 'package:qalamnote_mobile/models/user.dart';
 import 'package:qalamnote_mobile/pages/login.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:uuid/uuid.dart';
-import '../models/user.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
