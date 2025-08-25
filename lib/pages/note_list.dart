@@ -1,6 +1,7 @@
 import 'package:qalamnote_mobile/components/custom_color.dart';
 import 'package:qalamnote_mobile/models/note.dart';
 import 'package:qalamnote_mobile/pages/create_note.dart';
+import 'package:qalamnote_mobile/pages/credential.dart';
 import 'package:qalamnote_mobile/pages/detail_note.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -148,33 +149,75 @@ class NoteListPage extends StatelessWidget {
           );
         },
       ),
-      floatingActionButton: Stack(
-        alignment: Alignment.center,
-        children: [
-          Container(
-            width: 80,
-            height: 80,
-            decoration: BoxDecoration(
-              color: CustomColor.base_1,
-              shape: BoxShape.circle,
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Stack(
+              alignment: Alignment.center,
+              children: [
+                Container(
+                  width: 80,
+                  height: 80,
+                  decoration: BoxDecoration(
+                    color: CustomColor.base_1,
+                    shape: BoxShape.circle,
+                  ),
+                ),
+                SizedBox(
+                  width: 64,
+                  height: 64,
+                  child: FloatingActionButton(
+                    heroTag: "user_btn",
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => CredentialPage(userId: userId),
+                        ),
+                      );
+                    },
+                    backgroundColor: CustomColor.base_2,
+                    shape: const CircleBorder(),
+                    child: const Icon(Icons.person, size: 32, color: CustomColor.base_3),
+                  ),
+                ),
+              ],
             ),
-          ),
-          SizedBox(
-            width: 64,
-            height: 64,
-            child: FloatingActionButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => CreateNotePage(userId: userId)),
-                );
-              },
-              backgroundColor: CustomColor.primary,
-              shape: const CircleBorder(),
-              child: const Icon(Icons.add, size: 32, color: Colors.white),
+            Stack(
+              alignment: Alignment.center,
+              children: [
+                Container(
+                  width: 80,
+                  height: 80,
+                  decoration: BoxDecoration(
+                    color: CustomColor.base_1,
+                    shape: BoxShape.circle,
+                  ),
+                ),
+                SizedBox(
+                  width: 64,
+                  height: 64,
+                  child: FloatingActionButton(
+                    heroTag: "add_btn",
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => CreateNotePage(userId: userId),
+                        ),
+                      );
+                    },
+                    backgroundColor: CustomColor.primary,
+                    shape: const CircleBorder(),
+                    child: const Icon(Icons.add, size: 32, color: Colors.white),
+                  ),
+                ),
+              ],
             ),
-          ),
-        ],
+          ],
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );

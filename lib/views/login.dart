@@ -23,41 +23,43 @@ class LoginForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: 96),
-          CustomText.title("Let's Login"),
-          const SizedBox(height: 16),
-          CustomText.subtitle(
-            "And capture every word of wisdom from your favorite ustadz, anytime, anywhere.",
-          ),
-          const SizedBox(height: 32),
-          CustomTextField(
-            label: "Username",
-            placeholder: "johndoe123",
-            controller: usernameController,
-          ),
-          const SizedBox(height: 16),
-          CustomTextField(
-            label: "Password",
-            placeholder: "********",
-            obscureText: true,
-            controller: passwordController,
-          ),
-          const SizedBox(height: 64),
-          CustomButton(
-            text: "Login",
-            onPressed: onLogin,
-          ),
-          const SizedBox(height: 32),
-          if (isBoxEmpty)
-            const CustomTextWithLink(
-              text: "Don't have any account?",
-              textLink: "Register here",
-              destination: RegisterPage(),
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 96),
+            CustomText.title("Let's Login"),
+            const SizedBox(height: 16),
+            CustomText.subtitle(
+              "And capture every word of wisdom from your favorite ustadz, anytime, anywhere.",
             ),
-        ],
+            const SizedBox(height: 32),
+            CustomTextField(
+              label: "Username",
+              placeholder: "johndoe123",
+              controller: usernameController,
+            ),
+            const SizedBox(height: 16),
+            CustomTextField(
+              label: "Password",
+              placeholder: "********",
+              obscureText: true,
+              controller: passwordController,
+            ),
+            const SizedBox(height: 64),
+            CustomButton(
+              text: "Login",
+              onPressed: onLogin,
+            ),
+            const SizedBox(height: 32),
+            if (isBoxEmpty)
+              const CustomTextWithLink(
+                text: "Don't have any account?",
+                textLink: "Register here",
+                destination: RegisterPage(),
+              ),
+          ],
+        ),
       ),
     );
   }

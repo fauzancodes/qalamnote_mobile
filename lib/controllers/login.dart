@@ -56,6 +56,7 @@ class LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       body: LoginForm(
         usernameController: _usernameController,
         passwordController: _passwordController,
