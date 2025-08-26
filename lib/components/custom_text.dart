@@ -5,10 +5,20 @@ import 'package:qalamnote_mobile/components/custom_color.dart';
 class CustomText extends StatelessWidget {
   final String text;
   final TextStyle style;
+  final TextAlign? textAlign;
 
-  const CustomText._(this.text, this.style, {super.key});
+  const CustomText._(
+    this.text,
+    this.style, {
+    this.textAlign,
+    super.key,
+  });
 
-  factory CustomText.title(String text, {Key? key}) {
+  factory CustomText.title(
+    String text, {
+    Key? key,
+    TextAlign? textAlign,
+  }) {
     return CustomText._(
       text,
       GoogleFonts.inter(
@@ -17,10 +27,15 @@ class CustomText extends StatelessWidget {
         color: CustomColor.base_3,
       ),
       key: key,
+      textAlign: textAlign,
     );
   }
 
-  factory CustomText.subtitle(String text, {Key? key}) {
+  factory CustomText.subtitle(
+    String text, {
+    Key? key,
+    TextAlign? textAlign,
+  }) {
     return CustomText._(
       text,
       GoogleFonts.inter(
@@ -29,11 +44,16 @@ class CustomText extends StatelessWidget {
         color: CustomColor.base_4,
       ),
       key: key,
+      textAlign: textAlign,
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Text(text, style: style);
+    return Text(
+      text,
+      style: style,
+      textAlign: textAlign,
+    );
   }
 }

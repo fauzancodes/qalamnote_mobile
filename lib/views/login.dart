@@ -25,13 +25,23 @@ class LoginForm extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const SizedBox(height: 96),
-            CustomText.title("Let's Login"),
+            Image.asset(
+              'assets/images/logo.png',
+              width: 200,
+              height: 200,
+            ),
+            const SizedBox(height: 32),
+            CustomText.title(
+              "Let's Login",
+              textAlign: TextAlign.center,
+            ),
             const SizedBox(height: 16),
             CustomText.subtitle(
               "And capture every word of wisdom from your favorite ustadz, anytime, anywhere.",
+              textAlign: TextAlign.center,
             ),
             const SizedBox(height: 32),
             CustomTextField(

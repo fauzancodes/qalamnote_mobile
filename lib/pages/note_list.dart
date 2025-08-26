@@ -56,12 +56,6 @@ class NoteListPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 16),
-                  Image.asset(
-                    'assets/images/empty_note_arrow.png',
-                    width: 169,
-                    height: 123,
-                  ),
                 ],
               ),
             );

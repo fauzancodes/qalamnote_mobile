@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:qalamnote_mobile/components/custom_app_bar.dart';
 import 'package:qalamnote_mobile/components/custom_button.dart';
-import 'package:qalamnote_mobile/components/custom_color.dart';
 import 'package:qalamnote_mobile/components/custom_text.dart';
 import 'package:qalamnote_mobile/components/custom_text_field.dart';
 import 'package:qalamnote_mobile/components/custom_text_with_link.dart';
@@ -21,45 +21,28 @@ class RegisterForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        shape: const Border(
-          bottom: BorderSide(
-            color: CustomColor.base_4,
-            width: 1,
-          ),
-        ),
-        titleSpacing: 0,
-        automaticallyImplyLeading: false,
-        title: InkWell(
-          onTap: () => Navigator.pop(context),
-          child: Row(
-            children: const [
-              SizedBox(width: 8),
-              Icon(Icons.chevron_left, color: CustomColor.primary),
-              SizedBox(width: 4),
-              Text(
-                "Back",
-                style: TextStyle(
-                  color: CustomColor.primary,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
+      appBar: CustomAppBar(),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            const SizedBox(height: 32),
+            Image.asset(
+              'assets/images/logo.png',
+              width: 200,
+              height: 200,
+            ),
+            const SizedBox(height: 32),
+            CustomText.title(
+              "Register",
+              textAlign: TextAlign.center,
+            ),
             const SizedBox(height: 16),
-            CustomText.title("Register"),
-            const SizedBox(height: 16),
-            CustomText.subtitle("And start recording lectures from your ustadz. Organize your notes, revisit them anytime, and keep your journey of learning alive."),
+            CustomText.subtitle(
+              "And start recording lectures from your ustadz. Organize your notes, revisit them anytime, and keep your journey of learning alive.",
+              textAlign: TextAlign.center,
+            ),
             const SizedBox(height: 32),
             CustomTextField(
               label: "Username",
