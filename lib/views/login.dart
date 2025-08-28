@@ -68,6 +68,11 @@ class LoginForm extends StatelessWidget {
                 textLink: "Register here",
                 destination: RegisterPage(),
               ),
+            const SizedBox(height: 64),
+            CustomText.subtitle(
+              "QalamNote v1.0.0",
+              textAlign: TextAlign.center,
+            ),
           ],
         ),
       ),
