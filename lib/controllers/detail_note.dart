@@ -233,7 +233,7 @@ class DetailNotePageState extends State<DetailNotePage> {
                 border: InputBorder.none,
               ),
               style: GoogleFonts.inter(
-                fontSize: 16,
+                fontSize: 20,
                 fontWeight: FontWeight.w500,
                 color: CustomColor.base_3,
               ),

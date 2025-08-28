@@ -37,7 +37,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         Text(
           widget.label,
           style: GoogleFonts.inter(
-            fontSize: 14,
+            fontSize: 16,
             fontWeight: FontWeight.w500,
             color: CustomColor.base_3,
           ),

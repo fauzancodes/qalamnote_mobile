@@ -6,6 +6,7 @@ import 'package:qalamnote_mobile/pages/detail_note.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class NoteListPage extends StatelessWidget {
   final String userId;
@@ -50,7 +51,7 @@ class NoteListPage extends StatelessWidget {
                       'Start adding notes from your ustadz’s lectures so you can revisit and reflect on them anytime. Capture wisdom before it fades.',
                       textAlign: TextAlign.center,
                       style: GoogleFonts.inter(
-                        fontSize: 14,
+                        fontSize: 16,
                         fontWeight: FontWeight.w400,
                         color: CustomColor.base_4,
                       ),
@@ -63,82 +64,71 @@ class NoteListPage extends StatelessWidget {
 
           return Padding(
             padding: const EdgeInsets.all(8.0),
-            child: GridView.builder(
-              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 200,
-                mainAxisSpacing: 8,
-                crossAxisSpacing: 8,
-              ),
-              itemCount: box.length,
-              itemBuilder: (context, index) {
+            child: StaggeredGrid.count(
+              crossAxisCount: 2, // jumlah kolom
+              mainAxisSpacing: 8,
+              crossAxisSpacing: 8,
+              children: List.generate(box.length, (index) {
                 final note = box.getAt(index);
-                if (note == null) return const SizedBox();
+                if (note == null || note.userId != userId) return const SizedBox();
 
-                if (note.userId == userId) {
-                  return GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => DetailNotePage(
-                            noteKey: note.id,
-                            userId: userId,
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => DetailNotePage(
+                          noteKey: note.id,
+                          userId: userId,
+                        ),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: CustomColor.base_1),
+                      borderRadius: BorderRadius.circular(8),
+                      color: Colors.white,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              child: Text(
+                                note.title,
+                                style: GoogleFonts.inter(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w500,
+                                  color: CustomColor.base_3,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                            if (note.isFinished)
+                              const Icon(Icons.check_circle,
+                                  color: Colors.green, size: 20),
+                          ],
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          note.body,
+                          maxLines: 10,
+                          overflow: TextOverflow.ellipsis,
+                          style: GoogleFonts.inter(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            color: CustomColor.base_3,
                           ),
                         ),
-                      );
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: CustomColor.base_1),
-                        borderRadius: BorderRadius.circular(8),
-                        color: Colors.white,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                child: Text(
-                                  note.title,
-                                  style: GoogleFonts.inter(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
-                                    color: CustomColor.base_3,
-                                  ),
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                              if (note.isFinished)
-                                const Icon(
-                                  Icons.check_circle,
-                                  color: Colors.green,
-                                  size: 20,
-                                ),
-                            ],
-                          ),
-                          const SizedBox(height: 8),
-                          Text(
-                            note.body.length > 150
-                                ? '${note.body.substring(0, 150)}...'
-                                : note.body,
-                            style: GoogleFonts.inter(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w400,
-                              color: CustomColor.base_4,
-                            ),
-                          ),
-                        ],
-                      ),
+                      ],
                     ),
-                  );
-                }
-                
-                return null;
-              },
+                  ),
+                );
+              }),
             ),
           );
         },
@@ -154,7 +144,7 @@ class NoteListPage extends StatelessWidget {
                 Container(
                   width: 80,
                   height: 80,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: CustomColor.base_1,
                     shape: BoxShape.circle,
                   ),
@@ -185,7 +175,7 @@ class NoteListPage extends StatelessWidget {
                 Container(
                   width: 80,
                   height: 80,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: CustomColor.base_1,
                     shape: BoxShape.circle,
                   ),

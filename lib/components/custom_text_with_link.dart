@@ -22,7 +22,7 @@ class CustomTextWithLink extends StatelessWidget {
         Text(
           text,
           style: GoogleFonts.inter(
-            fontSize: 14,
+            fontSize: 16,
             fontWeight: FontWeight.w500,
             color: CustomColor.primary,
           ),
@@ -38,7 +38,7 @@ class CustomTextWithLink extends StatelessWidget {
           child: Text(
             textLink,
             style: GoogleFonts.inter(
-              fontSize: 14,
+              fontSize: 16,
               fontWeight: FontWeight.w500,
               color: CustomColor.primary,
             ),

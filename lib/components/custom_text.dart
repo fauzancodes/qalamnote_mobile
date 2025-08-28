@@ -39,7 +39,7 @@ class CustomText extends StatelessWidget {
     return CustomText._(
       text,
       GoogleFonts.inter(
-        fontSize: 14,
+        fontSize: 16,
         fontWeight: FontWeight.w400,
         color: CustomColor.base_4,
       ),

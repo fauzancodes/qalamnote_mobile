@@ -73,7 +73,7 @@ class CreateNoteForm extends StatelessWidget {
             TextField(
               controller: titleController,
               style: GoogleFonts.inter(
-                fontSize: 24,
+                fontSize: 26,
                 fontWeight: FontWeight.w700,
                 color: CustomColor.base_3,
               ),
@@ -101,9 +101,9 @@ class CreateNoteForm extends StatelessWidget {
                 maxLines: null,
                 expands: true,
                 style: GoogleFonts.inter(
-                  fontSize: 14,
+                  fontSize: 16,
                   fontWeight: FontWeight.w400,
-                  color: CustomColor.base_4,
+                  color: CustomColor.base_3,
                 ),
                 decoration: const InputDecoration(
                   hintText: "Write your note here...",
