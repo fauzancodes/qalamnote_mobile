@@ -1,20 +1,10 @@
-# qalamnote_mobile
+# Qalam Note
 
-A new Flutter project.
+**QalamNote** is a mobile application designed to help users conveniently record Islamic study sessions anytime and anywhere. Key features include:
 
-## Getting Started
+- Structured note-taking for Islamic lectures.  
+- Lecturer (Ustadz) and location selection for organized records.  
+- **Local-only storage** on the device, ensuring maximum privacy and security.  
+- Fully offline functionality, no internet connection required.  
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-
-### Generate hive adapter
-`flutter packages pub run build_runner build` or 
-`flutter packages pub run build_runner build --delete-conflicting-outputs`
+QalamNote is built with **Flutter**, focusing on delivering a secure, private, and user-friendly tool to support learning and documenting Islamic knowledge.  
