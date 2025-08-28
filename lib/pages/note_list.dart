@@ -62,73 +62,76 @@ class NoteListPage extends StatelessWidget {
             );
           }
 
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: StaggeredGrid.count(
-              crossAxisCount: 2, // jumlah kolom
-              mainAxisSpacing: 8,
-              crossAxisSpacing: 8,
-              children: List.generate(box.length, (index) {
-                final note = box.getAt(index);
-                if (note == null || note.userId != userId) return const SizedBox();
+          return SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: StaggeredGrid.count(
+                crossAxisCount: 2,
+                mainAxisSpacing: 8,
+                crossAxisSpacing: 8,
+                children: List.generate(box.length, (index) {
+                  final note = box.getAt(index);
+                  if (note == null || note.userId != userId) return const SizedBox();
 
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => DetailNotePage(
-                          noteKey: note.id,
-                          userId: userId,
-                        ),
-                      ),
-                    );
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: CustomColor.base_1),
-                      borderRadius: BorderRadius.circular(8),
-                      color: Colors.white,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-                              child: Text(
-                                note.title,
-                                style: GoogleFonts.inter(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w500,
-                                  color: CustomColor.base_3,
-                                ),
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                            if (note.isFinished)
-                              const Icon(Icons.check_circle,
-                                  color: Colors.green, size: 20),
-                          ],
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          note.body,
-                          maxLines: 10,
-                          overflow: TextOverflow.ellipsis,
-                          style: GoogleFonts.inter(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                            color: CustomColor.base_3,
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => DetailNotePage(
+                            noteKey: note.id,
+                            userId: userId,
                           ),
                         ),
-                      ],
+                      );
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: CustomColor.base_1),
+                        borderRadius: BorderRadius.circular(8),
+                        color: Colors.white,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  note.title,
+                                  style: GoogleFonts.inter(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w500,
+                                    color: CustomColor.base_3,
+                                  ),
+                                ),
+                              ),
+                              if (note.isFinished)
+                                const Icon(
+                                  Icons.check_circle,
+                                  color: Colors.green, size: 20
+                                ),
+                            ],
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            note.body,
+                            maxLines: 10,
+                            overflow: TextOverflow.ellipsis,
+                            style: GoogleFonts.inter(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                              color: CustomColor.base_3,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                );
-              }),
+                  );
+                }),
+              ),
             ),
           );
         },
