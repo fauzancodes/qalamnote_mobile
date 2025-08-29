@@ -41,7 +41,7 @@ class DetailNoteForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(),
+      appBar: CustomAppBar(onBack: updateNoteAndBack),
       body: Padding(
         padding: const EdgeInsets.only(bottom: 80.0),
         child: Column(

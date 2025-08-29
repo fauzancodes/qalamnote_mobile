@@ -64,7 +64,7 @@ class NoteListPage extends StatelessWidget {
 
           return SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.fromLTRB(8, 32, 8, 32),
               child: StaggeredGrid.count(
                 crossAxisCount: 2,
                 mainAxisSpacing: 8,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:qalamnote_mobile/components/custom_app_bar.dart';
 import 'package:qalamnote_mobile/components/custom_color.dart';
 import 'package:qalamnote_mobile/models/place.dart';
 import 'package:qalamnote_mobile/models/ustadz.dart';
@@ -36,36 +37,7 @@ class CreateNoteForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        shape: const Border(
-          bottom: BorderSide(
-            color: CustomColor.base_4,
-            width: 1,
-          ),
-        ),
-        titleSpacing: 0,
-        automaticallyImplyLeading: false,
-        title: InkWell(
-          onTap: saveNoteAndBack,
-          child: Row(
-            children: const [
-              SizedBox(width: 8),
-              Icon(Icons.chevron_left, color: CustomColor.primary),
-              SizedBox(width: 4),
-              Text(
-                "Back",
-                style: TextStyle(
-                  color: CustomColor.primary,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
+      appBar: CustomAppBar(onBack: saveNoteAndBack),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
