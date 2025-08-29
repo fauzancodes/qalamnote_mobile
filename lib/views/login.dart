@@ -70,7 +70,7 @@ class LoginForm extends StatelessWidget {
               ),
             const SizedBox(height: 64),
             CustomText.subtitle(
-              "QalamNote v1.0.5",
+              "QalamNote v1.0.6",
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 32),
